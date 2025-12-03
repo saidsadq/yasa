@@ -6,204 +6,206 @@
     <title>Document</title>
 </head>
 <body>
-araay .....
-#include <iostream>
-using namespace std;
-int main()
-{
-    int LuckyNumbers[] = { 1, 2, 3, 4 };
-    cout << LuckyNumbers[0] << endl;
+araay .....<br>
+#include <iostream><br>
+using namespace std;<br>
+int main()<br>
+{<br>
+    int LuckyNumbers[] = { 1, 2, 3, 4 };<br>
+    cout << LuckyNumbers[0] << endl;<br>
+<br>
+    system("pause");<br>
+    return 0;<br>
+}<br>
+........datataypakan varable...............<br>
+#include <iostream><br>
+using namespace std;<br>
+int main()<br>
+{<br>
+    int age;<br>
+    age = 20;<br>
+    int brth = 1996;<br>
+    float y = 45.5;<br>
+    double x = 33.3;<br>
+    char grade = 'A';<br>
+    string name = "Ali Kaka";<br>
+    bool isonline = true;<br>
+    cout << age << endl;<br>
+    cout << "la salle " << brth << "la daik bwyt " << endl; <br>
+    cout << y << endl;<br>
+    cout << grade << endl;<br>
+    cout << name << endl;<br>
+    cout << "online state:" << isonline << endl;  <br>
 
-    system("pause");
-    return 0;
-}
-........datataypakan varable...............
-#include <iostream>
-using namespace std;
-int main()
-{
-    int age;
-    age = 20;
-    int brth = 1996;
-    float y = 45.5;
-    double x = 33.3;
-    char grade = 'A';
-    string name = "Ali Kaka";
-    bool isonline = true;
-    cout << age << endl;
-    cout << "la salle " << brth << "la daik bwyt " << endl;
-    cout << y << endl;
-    cout << grade << endl;
-    cout << name << endl;
-    cout << "online state:" << isonline << endl;  
+<br>
 
+    system("pause");<br>
+    return 0;<br>
+}<br>
+.........string...........<br>
+#include <iostream><br>
+using namespace std;<br>
+void sayHi(string name, int age);<br>
+<br>
+int main()<br>
+{<br>
+    sayHi("Ali", 30);<br>
+    sayHi("sina", 20),<br>
 
+<br>
+    system("pause");<br>
+    return 0;<br>
+}<br>
+void sayHi(string name, int age) {<br>
+    cout << "slaw" + name;<br>
+    cout << ",tamant" << age << "salla" << endl; <br>
+}<br>
+..........if w els..1......<br>
+#include <iostream><br>
+using namespace std;<br>
+<br>
 
-    system("pause");
-    return 0;
-}
-.........string...........
-#include <iostream>
-using namespace std;
-void sayHi(string name, int age);
+int main()<br>
+{<br>
+    int x;<br>
+    cin >> x;<br>
+    if (x<=20 && x % 2==0){<br>
+        cout << "this is even" << endl;<br>
+    }<br>
+    else if(x<=20)<br>
+    {<br>
+        cout << "this is odd" << endl; <br>
+    }<br>
+    else <br>
+    {<br>
+        cout << "this number not limeted" << endl; <br>
+    }<br>
+    system("pouse");<br>
+    return 0;<br>
+}<br>
+.....if w else ...2..<br>
+#include <iostream><br>
+using namespace std;<br>
 
-int main()
-{
-    sayHi("Ali", 30);
-    sayHi("sina", 20),
+<br>
+int main()<br>
+{<br>
+    int num1;<br>
+    int num2;<br>
+    cin >> num1;<br>
+    cin >> num2;<br>
+    if (num1>num2){<br>
+        cout << "zhmaray yakam gawra tra la dwam" << endl;<br>
+    }<br>
+    else if(num1 < num2)<br>
+    {<br>
+        cout << "zhmaray yakam bchwktra la dwam" << endl;<br>
+    }<br>
+    else<br>
+    {<br>
+        cout << "hichkamyan" << endl;<br>
+    }<br>
+    system("pouse");<br>
+    return 0;<br>
+} <br>
+.......swich...<br>
+#include <iostream> <br>
+using namespace std; <br>
+<br>
 
-
-    system("pause");
-    return 0;
-}
-void sayHi(string name, int age) {
-    cout << "slaw" + name;
-    cout << ",tamant" << age << "salla" << endl;
-}
-..........if w els..1......
-#include <iostream>
-using namespace std;
-
-
-int main()
-{
-    int x;
-    cin >> x;
-    if (x<=20 && x % 2==0){
-        cout << "this is even" << endl;
-    }
-    else if(x<=20)
-    {
-        cout << "this is odd" << endl;
-    }
-    else
-    {
-        cout << "this number not limeted" << endl;
-    }
-    system("pouse");
-    return 0;
-}
-.....if w else ...2..
-#include <iostream>
-using namespace std;
-
-
-int main()
-{
-    int num1;
-    int num2;
-    cin >> num1;
-    cin >> num2;
-    if (num1>num2){
-        cout << "zhmaray yakam gawra tra la dwam" << endl;
-    }
-    else if(num1 < num2)
-    {
-        cout << "zhmaray yakam bchwktra la dwam" << endl;
-    }
-    else
-    {
-        cout << "hichkamyan" << endl;
-    }
-    system("pouse");
-    return 0;
-} 
-.......swich...
-#include <iostream>
-using namespace std;
-
-
-int main()
-{
-    int day = 4;
-    switch (day) { 
-        case 1:
-            cout << "monday" << endl;
-            break;
-        case 2:
-            cout << "tuesday" << endl;
-            break;
-        case 3:
-            cout << "wenesday" << endl;
-            break;
-        case 4:
-            cout << "thursday" << endl;
-            break;
-        case 5:
-            cout << "friday" << endl;
-            break;
-        case 6:
-            cout << "saturday" << endl;
-            break;
-        case 7:
-            cout << "sunday" << endl;
-            break;
-        default: cout << "Invalid Day" << endl;
-    }
+int main() <br>
+{<br>
+    int day = 4; <br>
+    switch (day) {  <br>
+        case 1: <br>
+            cout << "monday" << endl; <br>
+            break; <br>
+        case 2: <br>
+            cout << "tuesday" << endl; <br>
+            break; <br>
+        case 3: <br>
+            cout << "wenesday" << endl  <br>
+            break; <br>
+        case 4: <br>
+            cout << "thursday" << endl; <br>
+            break; <br>
+        case 5: <br>
+            cout << "friday" << endl; <br>
+            break; <br>
+        case 6: <br>
+            cout << "saturday" << endl; <br>
+            break; <br>
+        case 7: <br>
+            cout << "sunday" << endl; <br>
+				<br>
+            break; <br>
+        default: cout << "Invalid Day" << endl; <br>
+    }<br>
 	
-    system("pouse");
-    return 0;
-} 
-......lupp....
-#include <iostream>
-using namespace std;
-int main()
-{
-    int x = 1;
-    do {
-        cout << "slaaw" << x << endl;
-        x++;
-    } 
-    while (x < 5);
-    system("pause");
-    return 0;  
-}
-.....string....
-#include <iostream>
-using namespace std;
-int main()
-{
-    string greeting = "hello";
-    cout << greeting[0] << endl;
-    cout << "total char =" << greeting.length() << endl;
-    cout << greeting.find("e") << endl;
+    system("pouse"); <br>
+    return 0; <br>
+} <br>
+......lupp.... <br>
+#include <iostream> <br>
+using namespace std; <br>
+int main() <br>
+{<br>
+    int x = 1; <br>
+    do { <br>
+        cout << "slaaw" << x << endl; <br>
+        x++; <br>
+    } <br>
+    while (x < 5); <br>
+    system("pause"); <br>
+    return 0;  <br>
+} <br>
+.....string.... <br>
+#include <iostream> <br>
+using namespace std; <br>
+int main() <br>
+{ <br>
+    string greeting = "hello"; <br>
+    cout << greeting[0] << endl; <br>
+    cout << "total char =" << greeting.length() << endl; <br>
+    cout << greeting.find("e") << endl; <br>
    
-    system("pause");
-    return 0;  
-}
-.....7asiba...
+    system("pause"); <br>
+    return 0;  <br>
+} <br>
+.....7asiba... <br>
 
-#include <iostream>
-using namespace std;
-int main()
-{
-	int x;
-	int y;
-	char hema;
-	cin >> x;
-	cin >> hema;
-	cin >> y;
-	if (hema == '+') {
-		cout << x + y << endl;
-	}
-	else if (hema == '-') {
-		cout << x - y << endl;
-	}
-	else if (hema == '*') {
-		cout << x * y << endl;
-	}
-	else if (hema == '/') {
-		cout << x / y << endl;
-	}
-	else cout << "daxlkrdnaka hallaya" << endl;
+#include <iostream> <br>
+using namespace std; <br>
+int main() <br>
+{ <br>
+	int x; <br>
+	int y; <br>
+	char hema; <br>
+	cin >> x; <br>
+	cin >> hema; <br>
+	cin >> y; <br>
+	if (hema == '+') { <br>
+		cout << x + y << endl; <br>
+	} <br>
+	else if (hema == '-') { <br>
+		cout << x - y << endl; <br>
+	} <br>
+	else if (hema == '*') { <br>
+		cout << x * y << endl; <br>
+	} <br>
+	else if (hema == '/') { <br>
+		cout << x / y << endl; <br>
+	}<br>
+	else cout << "daxlkrdnaka hallaya" << endl; <br>
+<br>
 
 
-
-}
+} <br>
    
   
 </body>
 </html>
+
 
 
 
