@@ -6,202 +6,34 @@
     <title>Document</title>
 </head>
 <body>
-araay .....<br>
-#include <iostream><br>
-using namespace std;<br>
-int main()<br>
-{<br>
-    int LuckyNumbers[] = { 1, 2, 3, 4 };<br>
-    cout << LuckyNumbers[0] << endl;<br>
-<br>
-    system("pause");<br>
-    return 0;<br>
-}<br>
-........datataypakan varable...............<br>
-#include <iostream><br>
-using namespace std;<br>
-int main()<br>
-{<br>
-    int age;<br>
-    age = 20;<br>
-    int brth = 1996;<br>
-    float y = 45.5;<br>
-    double x = 33.3;<br>
-    char grade = 'A';<br>
-    string name = "Ali Kaka";<br>
-    bool isonline = true;<br>
-    cout << age << endl;<br>
-    cout << "la salle " << brth << "la daik bwyt " << endl; <br>
-    cout << y << endl;<br>
-    cout << grade << endl;<br>
-    cout << name << endl;<br>
-    cout << "online state:" << isonline << endl;  <br>
+<?php
 
-<br>
+namespace App\Http\Controllers;
 
-    system("pause");<br>
-    return 0;<br>
-}<br>
-.........string...........<br>
-#include <iostream><br>
-using namespace std;<br>
-void sayHi(string name, int age);<br>
-<br>
-int main()<br>
-{<br>
-    sayHi("Ali", 30);<br>
-    sayHi("sina", 20),<br>
+use App\Models\Task;
+use Illuminate\Http\Request;
 
-<br>
-    system("pause");<br>
-    return 0;<br>
-}<br>
-void sayHi(string name, int age) {<br>
-    cout << "slaw" + name;<br>
-    cout << ",tamant" << age << "salla" << endl; <br>
-}<br>
-..........if w els..1......<br>
-#include <iostream><br>
-using namespace std;<br>
-<br>
+class TaskController extends Controller
+{
+    public function index(): View
+    {
+        $tasks = Task::all();
+        return view('tasks', compact('tasks'));
+    }
 
-int main()<br>
-{<br>
-    int x;<br>
-    cin >> x;<br>
-    if (x<=20 && x % 2==0){<br>
-        cout << "this is even" << endl;<br>
-    }<br>
-    else if(x<=20)<br>
-    {<br>
-        cout << "this is odd" << endl; <br>
-    }<br>
-    else <br>
-    {<br>
-        cout << "this number not limeted" << endl; <br>
-    }<br>
-    system("pouse");<br>
-    return 0;<br>
-}<br>
-.....if w else ...2..<br>
-#include <iostream><br>
-using namespace std;<br>
+    public function store(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => 'required'
+        ]);
 
-<br>
-int main()<br>
-{<br>
-    int num1;<br>
-    int num2;<br>
-    cin >> num1;<br>
-    cin >> num2;<br>
-    if (num1>num2){<br>
-        cout << "zhmaray yakam gawra tra la dwam" << endl;<br>
-    }<br>
-    else if(num1 < num2)<br>
-    {<br>
-        cout << "zhmaray yakam bchwktra la dwam" << endl;<br>
-    }<br>
-    else<br>
-    {<br>
-        cout << "hichkamyan" << endl;<br>
-    }<br>
-    system("pouse");<br>
-    return 0;<br>
-} <br>
-.......swich...<br>
-#include <iostream> <br>
-using namespace std; <br>
-<br>
+        $task = new Task();
+        $task->name = $request->name;
+        $task->save();
 
-int main() <br>
-{<br>
-    int day = 4; <br>
-    switch (day) {  <br>
-        case 1: <br>
-            cout << "monday" << endl; <br>
-            break; <br>
-        case 2: <br>
-            cout << "tuesday" << endl; <br>
-            break; <br>
-        case 3: <br>
-            cout << "wenesday" << endl  <br>
-            break; <br>
-        case 4: <br>
-            cout << "thursday" << endl; <br>
-            break; <br>
-        case 5: <br>
-            cout << "friday" << endl; <br>
-            break; <br>
-        case 6: <br>
-            cout << "saturday" << endl; <br>
-            break; <br>
-        case 7: <br>
-            cout << "sunday" << endl; <br>
-				<br>
-            break; <br>
-        default: cout << "Invalid Day" << endl; <br>
-    }<br>
-	
-    system("pouse"); <br>
-    return 0; <br>
-} <br>
-......lupp.... <br>
-#include <iostream> <br>
-using namespace std; <br>
-int main() <br>
-{<br>
-    int x = 1; <br>
-    do { <br>
-        cout << "slaaw" << x << endl; <br>
-        x++; <br>
-    } <br>
-    while (x < 5); <br>
-    system("pause"); <br>
-    return 0;  <br>
-} <br>
-.....string.... <br>
-#include <iostream> <br>
-using namespace std; <br>
-int main() <br>
-{ <br>
-    string greeting = "hello"; <br>
-    cout << greeting[0] << endl; <br>
-    cout << "total char =" << greeting.length() << endl; <br>
-    cout << greeting.find("e") << endl; <br>
-   
-    system("pause"); <br>
-    return 0;  <br>
-} <br>
-.....7asiba... <br>
-
-#include <iostream> <br>
-using namespace std; <br>
-int main() <br>
-{ <br>
-	int x; <br>
-	int y; <br>
-	char hema; <br>
-	cin >> x; <br>
-	cin >> hema; <br>
-	cin >> y; <br>
-	if (hema == '+') { <br>
-		cout << x + y << endl; <br>
-	} <br>
-	else if (hema == '-') { <br>
-		cout << x - y << endl; <br>
-	} <br>
-	else if (hema == '*') { <br>
-		cout << x * y << endl; <br>
-	} <br>
-	else if (hema == '/') { <br>
-		cout << x / y << endl; <br>
-	}<br>
-	else cout << "daxlkrdnaka hallaya" << endl; <br>
-<br>
-
-
-} <br>
-   
+        return redirect()->back();
+    }
+}
   
 </body>
 </html>
