@@ -1,12 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>پیشاندانی کۆد</title>
+    <style>
+        /* ستایڵێک بۆ ئەوەی کۆدەکە جوانتر و ڕوونتر دەرکەوێت */
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-left: 5px solid #2ecc71;
+            color: #333;
+            page-break-inside: avoid;
+            font-family: monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 1.6em;
+            max-width: 100%;
+            overflow: auto;
+            padding: 1em 1.5em;
+            display: block;
+            word-wrap: break-word;
+            direction: ltr; /* کۆدەکە بە لای چەپ بێت باشترە */
+            text-align: left;
+        }
+        code {
+            font-family: "Courier New", Courier, monospace;
+        }
+    </style>
 </head>
 <body>
-<?php
+
+    <h2>کۆدی TaskController</h2>
+    
+    <pre><code>
+&lt;?php
 
 namespace App\Http\Controllers;
 
@@ -34,15 +61,7 @@ class TaskController extends Controller
         return redirect()->back();
     }
 }
-  
+    </code></pre>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
