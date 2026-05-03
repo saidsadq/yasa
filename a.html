@@ -33,34 +33,83 @@
     <h2>کۆدی TaskController</h2>
     
     <pre><code>
-&lt;?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <style>
+        dev {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
 
-namespace App\Http\Controllers;
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" >PythonDSP</a>
+            <ul class="navbar-nav ">
+                <li class="nav-item"> <a class="nav-link">HTML</a> </li>
+                <li class="nav-item"><a class="nav-link">CSS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> More</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" >Bootstrap</a></li>
+                        <li><a class="dropdown-item" >JavaScript</a></li>
+                        <li><a class="dropdown-item" >jQuery</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+</nav>
 
-use App\Models\Task;
-use Illuminate\Http\Request;
 
-class TaskController extends Controller
-{
-    public function index(): View
-    {
-        $tasks = Task::all();
-        return view('tasks', compact('tasks'));
-    }
+  <p>
+     
+        <span class="badge bg-success">Success</span>
+    
+        <span class="badge bg-danger">Danger</span>
+    </p>
 
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => 'required'
-        ]);
 
-        $task = new Task();
-        $task->name = $request->name;
-        $task->save();
+       <div class="row">
+  <div class="col-lg-4 col-md-6 col-sm-12">Column 1</div>
+  <div class="col-lg-4 col-md-6 col-sm-12">Column 2</div>
+  <div class="col-lg-4 col-md-12 col-sm-12">Column 3</div>
+</div>
 
-        return redirect()->back();
-    }
-}
+
+
+
+
+
+    <h3>Basic Form</h3>
+    <div class="col-sm-5" style="background:pink; padding:20px;">
+<form action="">
+<label for="">Emaill addres</label>
+<input type="email" class="form-control" placeholder="emailakat bnwsa">
+
+<label for="">Passord</label>
+<input type="password" class="form-control" placeholder="passord bnwsa">
+
+<label for="">file input</label>
+<input type="file" class="form-control">
+<p class="help-block">help block etr awa</p>
+<div class="checkbox">
+<label for=""><input class="checkbox" type="checkbox">check me out</label>
+</div>
+<button type="submit" class="btn btn-info">submit</button>
+
+</form>
+
+
+    </div>
+    <script src="bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
+</body>
+</html>
     </code></pre>
 
 </body>
