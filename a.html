@@ -3,133 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Display</title>
+    <title>PHP Code Viewer</title>
     <style>
-        /* ستایلی شوێنی پیشاندانی کۆدەکە */
-        .code-container {
+        body { font-family: sans-serif; background-color: #f0f2f5; padding: 20px; }
+        .code-wrapper {
             position: relative;
-            background: #282c34;
-            color: #abb2bf;
+            background: #1e1e1e;
+            color: #d4d4d4;
             padding: 20px;
-            border-radius: 8px;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 20px auto;
-            max-width: 90%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 1000px;
+            margin: auto;
         }
-
         pre {
             margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
             overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            line-height: 1.5;
+            font-size: 14px;
         }
-
-        /* ستایلی دوگمەی کۆپی */
-        .copy-btn {
+        .copy-button {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #61afef;
+            top: 15px;
+            right: 15px;
+            background: #4caf50;
             color: white;
             border: none;
-            padding: 5px 12px;
-            border-radius: 4px;
+            padding: 8px 15px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 12px;
+            font-weight: bold;
             transition: 0.3s;
         }
-
-        .copy-btn:hover {
-            background: #528bff;
+        .copy-button:hover { background: #45a049; }
+        .language-label {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            color: #858585;
+            font-size: 12px;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
-<div class="code-container">
-    <button class="copy-btn" onclick="copyCode()">Copy Code</button>
-    <pre><code id="myCode">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css"&gt;
-    &lt;style&gt;
-        dev {
-            background-color: pink;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
+<div class="code-wrapper">
+    <span class="language-label">PHP Source Code</span>
+    <button class="copy-button" onclick="copyToClipboard()">Copy Code</button>
+    <pre><code id="phpCodeContent">&lt;?php
+$f = 'data.json';
+$d = json_decode(file_get_contents($f) ?: '[]', true);
 
-&lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
-    &lt;div class="container"&gt;
-        &lt;a class="navbar-brand" &gt;PythonDSP&lt;/a&gt;
-            &lt;ul class="navbar-nav "&gt;
-                &lt;li class="nav-item"&gt; &lt;a class="nav-link"&gt;HTML&lt;/a&gt; &lt;/li&gt;
-                &lt;li class="nav-item"&gt;&lt;a class="nav-link"&gt;CSS&lt;/a&gt;&lt;/li&gt;
-                &lt;li class="nav-item dropdown"&gt;
-                    &lt;a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"&gt; More&lt;/a&gt;
-                    &lt;ul class="dropdown-menu"&gt;
-                        &lt;li&gt;&lt;a class="dropdown-item" &gt;Bootstrap&lt;/a&gt;&lt;/li&gt;
-                        &lt;li&gt;&lt;a class="dropdown-item" &gt;JavaScript&lt;/a&gt;&lt;/li&gt;
-                        &lt;li&gt;&lt;a class="dropdown-item" &gt;jQuery&lt;/a&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                &lt;/li&gt;
-            &lt;/ul&gt;
-        &lt;/div&gt;
-&lt;/nav&gt;
+if (isset($_POST['n'])) {
+    if ($_POST['id']) {
+        foreach($d as &$v) if($v['id'] == $_POST['id']) $v = $_POST;
+    } else { $_POST['id'] = time(); $d[] = $_POST; }
+    file_put_contents($f, json_encode($d)); header("Location: ?");
+}
 
-  &lt;p&gt;
-        &lt;span class="badge bg-success"&gt;Success&lt;/span&gt;
-        &lt;span class="badge bg-danger"&gt;Danger&lt;/span&gt;
-    &lt;/p&gt;
+if (isset($_GET['del'])) {
+    $d = array_values(array_filter($d, fn($v) =&gt; $v['id'] != $_GET['del']));
+    file_put_contents($f, json_encode($d)); header("Location: ?");
+}
 
-       &lt;div class="row"&gt;
-  &lt;div class="col-lg-4 col-md-6 col-sm-12"&gt;Column 1&lt;/div&gt;
-  &lt;div class="col-lg-4 col-md-6 col-sm-12"&gt;Column 2&lt;/div&gt;
-  &lt;div class="col-lg-4 col-md-12 col-sm-12"&gt;Column 3&lt;/div&gt;
-&lt;/div&gt;
+$e = isset($_GET['edit']) ? current(array_filter($d, fn($v) =&gt; $v['id'] == $_GET['edit'])) :
+['id' =&gt; '', 'n' =&gt; '', 'e' =&gt; '', 'p' =&gt; '', 'a' =&gt; '', 'g' =&gt; ''];
+?&gt;
 
-    &lt;h3&gt;Basic Form&lt;/h3&gt;
-    &lt;div class="col-sm-5" style="background:pink; padding:20px;"&gt;
-&lt;form action=""&gt;
-&lt;label for=""&gt;Emaill addres&lt;/label&gt;
-&lt;input type="email" class="form-control" placeholder="emailakat bnwsa"&gt;
-
-&lt;label for=""&gt;Passord&lt;/label&gt;
-&lt;input type="password" class="form-control" placeholder="passord bnwsa"&gt;
-
-&lt;label for=""&gt;file input&lt;/label&gt;
-&lt;input type="file" class="form-control"&gt;
-&lt;p class="help-block"&gt;help block etr awa&lt;/p&gt;
-&lt;div class="checkbox"&gt;
-&lt;label for=""&gt;&lt;input class="checkbox" type="checkbox"&gt;check me out&lt;/label&gt;
-&lt;/div&gt;
-&lt;button type="submit" class="btn btn-info"&gt;submit&lt;/button&gt;
-
+&lt;form method="post"&gt;
+    &lt;input type="hidden" name="id" value="&lt;?=$e['id']?&gt;"&gt;
+    &lt;input name="n" value="&lt;?=$e['n']?&gt;" placeholder="ناو" required&gt;
+    &lt;input name="e" value="&lt;?=$e['e']?&gt;" placeholder="ئیمەیڵ" required&gt;
+    &lt;input name="p" value="&lt;?=$e['p']?&gt;" placeholder="تەلەفۆن" required&gt;
+    &lt;input name="a" value="&lt;?=$e['a']?&gt;" placeholder="شوێن" required&gt;
+    &lt;select name="g"&gt;
+        &lt;option&gt;نێر&lt;/option&gt;
+        &lt;option &lt;?=$e['g']=='مێ'?'selected':''?&gt;&gt;مێ&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;button&gt;تۆمارکردن&lt;/button&gt;
 &lt;/form&gt;
-    &lt;/div&gt;
-    &lt;script src="bootstrap-5.3.8-dist/js/bootstrap.min.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+
+&lt;table border="1" style="width:100%"&gt;
+    &lt;?php foreach($d as $v): ?&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;?=$v['n']?&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;?=$v['e']?&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;?=$v['p']?&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;?=$v['a']?&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;?=$v['g']?&gt;&lt;/td&gt;
+        &lt;td&gt;
+            &lt;a href="?edit=&lt;?=$v['id']?&gt;"&gt;دەستکاری&lt;/a&gt; | &lt;a href="?del=&lt;?=$v['id']?&gt;"&gt;سڕینەوە&lt;/a&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;?php endforeach; ?&gt;
+&lt;/table&gt;</code></pre>
 </div>
 
 <script>
-    function copyCode() {
-        const codeElement = document.getElementById('myCode');
+    function copyToClipboard() {
+        const code = document.getElementById('phpCodeContent').textContent;
         const textArea = document.createElement('textarea');
-        textArea.value = codeElement.textContent;
+        textArea.value = code;
         document.body.appendChild(textArea);
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
         
-        const btn = document.querySelector('.copy-btn');
+        const btn = document.querySelector('.copy-button');
         btn.innerText = 'Copied!';
-        setTimeout(() => { btn.innerText = 'Copy Code'; }, 2000);
+        btn.style.background = '#2196F3';
+        setTimeout(() => { 
+            btn.innerText = 'Copy Code'; 
+            btn.style.background = '#4caf50';
+        }, 2000);
     }
 </script>
 
