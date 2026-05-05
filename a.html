@@ -1,122 +1,473 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Code Viewer</title>
+    <title>C++ and MFC Course Lessons</title>
     <style>
-        body { font-family: sans-serif; background-color: #f0f2f5; padding: 20px; }
-        .code-wrapper {
-            position: relative;
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-width: 1000px;
-            margin: auto;
+        :root {
+            --primary: #007acc;
+            --bg-dark: #1e1e1e;
+            --bg-light: #252526;
+            --text-color: #d4d4d4;
+            --border-color: #3c3c3c;
         }
-        pre {
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
             margin: 0;
-            overflow-x: auto;
-            font-family: 'Consolas', 'Monaco', monospace;
-            line-height: 1.5;
-            font-size: 14px;
+            padding: 20px;
         }
-        .copy-button {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #4caf50;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007acc;
+            margin-bottom: 30px;
+        }
+
+        /* ستایلی بەشەکان (Accordion) */
+        .lesson-card {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .lesson-header {
+            background-color: var(--bg-dark);
+            padding: 15px 20px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.3s;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            border-bottom: 1px solid var(--border-color);
         }
-        .copy-button:hover { background: #45a049; }
-        .language-label {
+
+        .lesson-header:hover {
+            background-color: #2d2d30;
+        }
+
+        .lesson-content {
+            display: none;
+            padding: 20px;
+            background-color: #181818;
+            position: relative;
+        }
+
+        .lesson-content.active {
+            display: block;
+        }
+
+        /* ژینگەی پیشاندانی کۆد */
+        .code-container {
+            position: relative;
+            background: var(--bg-dark);
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            margin-top: 10px;
+        }
+
+        pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-color);
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* دوگمەی کۆپی کردن */
+        .copy-btn {
             position: absolute;
-            top: 15px;
-            left: 20px;
-            color: #858585;
+            top: 10px;
+            left: 10px; /* لای چەپ چونکە پەڕەکە بە کوردی ڕاست بۆ چەپە */
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
             font-size: 12px;
-            text-transform: uppercase;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: #0062a3;
+        }
+
+        .explanation {
+            font-size: 14px;
+            color: #b0b0b0;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .arrow {
+            transition: transform 0.2s;
+        }
+
+        .active .arrow {
+            transform: rotate(180deg);
         }
     </style>
 </head>
 <body>
 
-<div class="code-wrapper">
-    <span class="language-label">PHP Source Code</span>
-    <button class="copy-button" onclick="copyToClipboard()">Copy Code</button>
-    <pre><code id="phpCodeContent">&lt;?php
-$f = 'data.json';
-$d = json_decode(file_get_contents($f) ?: '[]', true);
+<div class="container">
+    <h1>وانەکانی بەرنامەسازی C++ و MFC Desktop App</h1>
 
-if (isset($_POST['n'])) {
-    if ($_POST['id']) {
-        foreach($d as &$v) if($v['id'] == $_POST['id']) $v = $_POST;
-    } else { $_POST['id'] = time(); $d[] = $_POST; }
-    file_put_contents($f, json_encode($d)); header("Location: ?");
+    <div class="lesson-card">
+        <div class="lesson-header" onclick="toggleLesson(this)">
+            <span>وانەی یەکەم: Hello World (Console App)</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="lesson-content">
+            <div class="explanation">یەکەمین بەرنامە لە زمانەکەدا بۆ ناسین و پیشاندانی دەقی Hello World لەسەر شاشەی ڕەش.</div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">کۆپی کەرەوە</button>
+                <pre><code>#include &lt;iostream&gt;
+using namespace std;
+int main()
+{
+    cout &lt;&lt; "Hello World!\n";
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-header" onclick="toggleLesson(this)">
+            <span>وانەی دووەم: تەمەن و ساڵی لەدایکبوون (Variables & Data Types)</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="lesson-content">
+            <div class="explanation">ڕوونکردنەوەی جۆرەکانی گۆڕاوەکان وەک (int, float, double, char, string, bool).</div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">کۆپی کەرەوە</button>
+                <pre><code>#include &lt;iostream&gt;
+using namespace std;
+int main()
+{
+    int age;
+    age = 20;
+    int brth = 1996;
+    float y = 45.5;
+    double x = 33.3;
+    char grade = 'A';
+    string name = "sultan";
+    bool isOnline = true;
+
+    cout &lt;&lt; age &lt;&lt; endl;
+    cout &lt;&lt; "lasaly " &lt;&lt; brth &lt;&lt; " ladaykbwyt" &lt;&lt; endl;
+    cout &lt;&lt; y &lt;&lt; endl;
+    cout &lt;&lt; grade &lt;&lt; endl;
+    cout &lt;&lt; name &lt;&lt; endl;
+    cout &lt;&lt; "online state:" &lt;&lt; isOnline &lt;&lt; endl;
+
+    system("pause");
+    return 0;  
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-header" onclick="toggleLesson(this)">
+            <span>وانەی سێیەم: حاسیبە ١ (سادە)</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="lesson-content">
+            <div class="explanation">کرداری کۆکردنەوە و دابەشکردنی سادە لە نێوان ژمارەکاندا.</div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">کۆپی کەرەوە</button>
+                <pre><code>#include &lt;iostream&gt;
+using namespace std;
+int main()
+{
+    int num1 = 5;
+    int num2 = 4;
+    int sum = num1 + num2;
+
+    double num3 = 7;
+    int num4 = 2;
+    double Div = num3 / num4;
+
+    cout &lt;&lt; "sum:" &lt;&lt; sum &lt;&lt; endl;
+    cout &lt;&lt; "Div:" &lt;&lt; Div &lt;&lt; endl;
+
+    system("pause");
+    return 0;  
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-header" onclick="toggleLesson(this)">
+            <span>وانەی چوارەم: حاسیبە ٢ (کردارە بیرکارییەکان)</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="lesson-content">
+            <div class="explanation">پیشاندانی کردارەکانی کۆکردنەوە، لێدەرکردن، و لێکدان لەسەر گۆڕاوەکان.</div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">کۆپی کەرەوە</button>
+                <pre><code>#include &lt;iostream&gt;
+using namespace std;
+int main()
+{
+    int a = 8, b = 3;
+    cout &lt;&lt; "a+b" &lt;&lt; (a + b) &lt;&lt; endl;
+    cout &lt;&lt; "a-b" &lt;&lt; (a - b) &lt;&lt; endl;
+    cout &lt;&lt; "a*b" &lt;&lt; (a * b) &lt;&lt; endl;
+    cout &lt;&lt; "a+b" &lt;&lt; (a + b) &lt;&lt; endl;
+
+    system("pause");
+    return 0;  
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-header" onclick="toggleLesson(this)">
+            <span>وانەی پێنجەم: مامەڵەکردن لەگەڵ String</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="lesson-content">
+            <div class="explanation">وەرگرتنی پیتی دەستنیشانکراو لە تێکستێکدا و پیشاندانی درێژی تێکستەکە.</div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">کۆپی کەرەوە</button>
+                <pre><code>#include &lt;iostream&gt;
+using namespace std;
+int main()
+{
+    string greeting = "Alikaka";
+    cout &lt;&lt; greeting[0] &lt;&lt; endl;
+    cout &lt;&lt; "total char" &lt;&lt; greeting.length() &lt;&lt; endl;
+
+    system("pause");
+    return 0;  
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-header" onclick="toggleLesson(this)">
+            <span>وانەی شەشەم: دروستکردنی فانکشن (Functions)</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="lesson-content">
+            <div class="explanation">چۆنیەتی دروستکردنی فانکشنی دەرەکی و ناردنی زانیاری (Arguments) بۆی.</div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">کۆپی کەرەوە</button>
+                <pre><code>#include &lt;iostream&gt;
+using namespace std;
+void sayHi(string name, int age);
+
+int main()
+{
+    sayHi("Ali kaka", 30);
+    sayHi("sina", 20);
+
+    system("pause");
+    return 0;  
 }
 
-if (isset($_GET['del'])) {
-    $d = array_values(array_filter($d, fn($v) =&gt; $v['id'] != $_GET['del']));
-    file_put_contents($f, json_encode($d)); header("Location: ?");
-}
+void sayHi(string name, int age)
+{
+    cout &lt;&lt; "slaw " + name;
+    cout &lt;&lt; ", tamant " &lt;&lt; age &lt;&lt; " salla" &lt;&lt; endl;
+}</code></pre>
+            </div>
+        </div>
+    </div>
 
-$e = isset($_GET['edit']) ? current(array_filter($d, fn($v) =&gt; $v['id'] == $_GET['edit'])) :
-['id' =&gt; '', 'n' =&gt; '', 'e' =&gt; '', 'p' =&gt; '', 'a' =&gt; '', 'g' =&gt; ''];
-?&gt;
+    <div class="lesson-card">
+        <div class="lesson-header" onclick="toggleLesson(this)">
+            <span>وانەی حەوتەم: وەرگرتنی داتا لە بەکارهێنەر (cin Input)</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="lesson-content">
+            <div class="explanation">بەکارھێنانی فەرمانی cin بۆ وەرگرتنی زانیاری ناو و تەمەن لە ڕێگەی کیبۆردەوە.</div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">کۆپی کەرەوە</button>
+                <pre><code>#include &lt;iostream&gt;
+using namespace std;
 
-&lt;form method="post"&gt;
-    &lt;input type="hidden" name="id" value="&lt;?=$e['id']?&gt;"&gt;
-    &lt;input name="n" value="&lt;?=$e['n']?&gt;" placeholder="ناو" required&gt;
-    &lt;input name="e" value="&lt;?=$e['e']?&gt;" placeholder="ئیمەیڵ" required&gt;
-    &lt;input name="p" value="&lt;?=$e['p']?&gt;" placeholder="تەلەفۆن" required&gt;
-    &lt;input name="a" value="&lt;?=$e['a']?&gt;" placeholder="شوێن" required&gt;
-    &lt;select name="g"&gt;
-        &lt;option&gt;نێر&lt;/option&gt;
-        &lt;option &lt;?=$e['g']=='مێ'?'selected':''?&gt;&gt;مێ&lt;/option&gt;
-    &lt;/select&gt;
-    &lt;button&gt;تۆمارکردن&lt;/button&gt;
-&lt;/form&gt;
+int main()
+{
+    string name;
+    int age = 0;
+    cout &lt;&lt; "nawe xot w tamant bnwsa" &lt;&lt; endl;
+    cin &gt;&gt; name &gt;&gt; age;
+    cout &lt;&lt; "slaw: " &lt;&lt; name &lt;&lt; endl;
+    cout &lt;&lt; "to tamant " &lt;&lt; age &lt;&lt; " a" &lt;&lt; endl;
 
-&lt;table border="1" style="width:100%"&gt;
-    &lt;?php foreach($d as $v): ?&gt;
-    &lt;tr&gt;
-        &lt;td&gt;&lt;?=$v['n']?&gt;&lt;/td&gt;
-        &lt;td&gt;&lt;?=$v['e']?&gt;&lt;/td&gt;
-        &lt;td&gt;&lt;?=$v['p']?&gt;&lt;/td&gt;
-        &lt;td&gt;&lt;?=$v['a']?&gt;&lt;/td&gt;
-        &lt;td&gt;&lt;?=$v['g']?&gt;&lt;/td&gt;
-        &lt;td&gt;
-            &lt;a href="?edit=&lt;?=$v['id']?&gt;"&gt;دەستکاری&lt;/a&gt; | &lt;a href="?del=&lt;?=$v['id']?&gt;"&gt;سڕینەوە&lt;/a&gt;
-        &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;?php endforeach; ?&gt;
-&lt;/table&gt;</code></pre>
+    system("pause");
+    return 0;  
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-header" onclick="toggleLesson(this)">
+            <span>وانەی هەشتەم: مەرجەکان (If, Else if, Else)</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="lesson-content">
+            <div class="explanation">بەراوردکردنی دوو ژمارە کە ئایا کامیان گەورەترن، بچووکترن یان یەکسانن.</div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">کۆپی کەرەوە</button>
+                <pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int num1;
+    int num2;
+    cin &gt;&gt; num1;
+    cin &gt;&gt; num2;
+    if(num1 &gt; num2)
+    {
+        cout &lt;&lt; "zhmaray yakam gawra tra la dwam" &lt;&lt; endl;
+    }
+    else if (num1 &lt; num2) {
+        cout &lt;&lt; "zhmaray yakam bchwktra tra la dwam" &lt;&lt; endl;
+    }
+    else if (num1 == num2) {
+        cout &lt;&lt; "zhmaray yakam yaksana ba dwam" &lt;&lt; endl;
+    }
+    else {
+        cout &lt;&lt; "hichkamyan" &lt;&lt; endl;
+    }
+    system("pause");
+    return 0;  
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-header" onclick="toggleLesson(this)">
+            <span>وانەی نۆیەم: خولگەکان (For Loop)</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="lesson-content">
+            <div class="explanation">بەکارھێنانی For Loop بۆ دووبارەکردنەوەی کۆد لە ١ تا ٤.</div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">کۆپی کەرەوە</button>
+                <pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    for (int x = 1; x &lt; 5; x++) {
+        cout &lt;&lt; "slaw " &lt;&lt; x &lt;&lt; endl;
+    }
+    system("pause");
+    return 0;  
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-header" onclick="toggleLesson(this)">
+            <span>وانەی دەیەم: کێشانی شێوەکان لە MFC (Graphics in Single Document)</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="lesson-content">
+            <div class="explanation">ڕێنمایی کێشانی لاکێشە، بازنە، هێڵ و نووسینی دەق لە ناو فایلی <b>view.cpp</b> لە ژێر بەشی <code>OnDraw</code>:</div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">کۆپی کەرەوە</button>
+                <pre><code>// برو لۆ فایلی view.cpp لە ناو OnDraw دا کەرەکتەری ناو کەوانەکە بکە بە A و ئەم کۆدەی خوارەوە بنووسە:
+
+A-&gt;Rectangle(50, 20, 600, 500);
+A-&gt;Ellipse(180, 120, 430, 430);
+A-&gt;LineTo(600, 500);
+A-&gt;TextOut(280, 270, _T("Ali kaka"));</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <div class="lesson-header" onclick="toggleLesson(this)">
+            <span>وانەی یازدەیەم: دروستکردنی حاسیبە بە MFC Dialogue Basic</span>
+            <span class="arrow">▼</span>
+        </div>
+        <div class="lesson-content">
+            <div class="explanation">
+                ڕێنمایی دروستکردنی پڕۆژەی حاسیبە:<br>
+                1. دروستکردنی ٣ Static Text بە ناوەکانی (A, B, C).<br>
+                2. دروستکردنی ٣ Edit Control و گۆڕینی IDـەکانیان بۆ (_A, _B, _C).<br>
+                3. زیادکردنی Variable لە جۆری <b>double</b> بۆ هەریەکێکیان لەسەر کاتی Value بە ناوەکانی <code>m_a</code> و <code>m_b</code> و <code>m_c</code>.<br>
+                4. دروستکردنی Event Handler بۆ دوگمەکە و نووسینی ئەم کۆدە:
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" onclick="copyCode(this)">کۆپی کەرەوە</button>
+                <pre><code>UpdateData(TRUE);
+
+m_c = m_a + m_b;
+
+UpdateData(FALSE);</code></pre>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script>
-    function copyToClipboard() {
-        const code = document.getElementById('phpCodeContent').textContent;
-        const textArea = document.createElement('textarea');
-        textArea.value = code;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
+    // کۆنترۆڵکردنی پیشاندانی بەشەکان
+    function toggleLesson(header) {
+        const content = header.nextElementSibling;
+        const arrow = header.querySelector('.arrow');
         
-        const btn = document.querySelector('.copy-button');
-        btn.innerText = 'Copied!';
-        btn.style.background = '#2196F3';
-        setTimeout(() => { 
-            btn.innerText = 'Copy Code'; 
-            btn.style.background = '#4caf50';
+        if (content.style.display === "block") {
+            content.style.display = "none";
+            arrow.style.transform = "rotate(0deg)";
+        } else {
+            content.style.display = "block";
+            arrow.style.transform = "rotate(180deg)";
+        }
+    }
+
+    // فەنکشنی کۆپی کردنی تێکستەکان
+    function copyCode(button) {
+        const pre = button.nextElementSibling;
+        const codeText = pre.querySelector('code').textContent;
+        
+        const tempTextArea = document.createElement('textarea');
+        tempTextArea.value = codeText;
+        document.body.appendChild(tempTextArea);
+        tempTextArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempTextArea);
+
+        // گۆڕینی لێکۆڵینەوەی دوگمەکە بۆ ماوەیەکی کاتی
+        button.innerText = 'کۆپی بوو!';
+        button.style.backgroundColor = '#4caf50';
+        
+        setTimeout(() => {
+            button.innerText = 'کۆپی کەرەوە';
+            button.style.backgroundColor = '#007acc';
         }, 2000);
     }
 </script>
