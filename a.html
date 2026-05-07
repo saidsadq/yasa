@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Codes</title>
+    <title>Flutter Code Viewer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,7 +12,6 @@
             padding: 20px;
         }
         .code-container {
-            position: relative;
             background: #1e1e1e;
             color: #d4d4d4;
             padding: 20px;
@@ -31,219 +30,129 @@
             font-size: 14px;
             line-height: 1.5;
         }
-        .copy-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #007acc;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .copy-btn:hover {
-            background: #005999;
-        }
     </style>
 </head>
 <body>
 
 <div class="code-container">
-    <button class="copy-btn" onclick="copyAllCode()">Copy All Code</button>
-    <pre><code id="fullCodeBlock">warze yakam  c++ windos console  console app
+<pre><code>wanay 1  la dile lib la main.dart
+import 'package:flutter/material.dart';
 
- .........................
-taman w la daik bwn  
-
-#include &lt;iostream&gt;
-using namespace std;
-int main()
-{
-    int age;
-    age = 20;
-    int brth = 1996;
-    float y = 45.5;
-    double x = 33.3;
-    char grade = 'A';
-    string name = "sultan";
-    bool isOnline = true;
-
-    cout &lt;&lt; age &lt;&lt; endl;
-    cout &lt;&lt; "lasaly" &lt;&lt;brth&lt;&lt;"ladaykbwyt" &lt;&lt; endl;
-    cout &lt;&lt; y &lt;&lt; endl;
-    cout &lt;&lt; grade &lt;&lt; endl;
-    cout &lt;&lt; name &lt;&lt; endl;
-    cout &lt;&lt; "online state:" &lt;&lt; isOnline &lt;&lt; endl;
-
-    system("pause");
-    return0:  
-}
-
-.................
-
-......................
-stringakaaa 
-
-#include &lt;iostream&gt;
-using namespace std;
-int main()
-{
-    string greeting = "Alikaka";
-    cout &lt;&lt; greeting[0] &lt;&lt; endl;
-    cout &lt;&lt; "total char" &lt;&lt; greeting.length()&lt;&lt; endl;
-
-    system("pause");
-    return0:  
-}
-...........
-funshn
-
-
-
-#include &lt;iostream&gt;
-using namespace std;
-void sayHi(string ame, int age);
-
-
-int main()
-{
-    sayHi("Ali kaka",30);
-    sayHi("sina", 20);
-   
-
-    system("pause");
-    return0:  
-}
-void sayHi(string name, int age)
-{
-    cout &lt;&lt; "slaw" + name;
-    cout &lt;&lt; ",tamant" &lt;&lt; age &lt;&lt; "salla" &lt;&lt; endl;
-}
- .........
-inputakan ka xot sht daxlkayt  
-
-
-
-#include &lt;iostream&gt;
-using namespace std;
-
-
-
-int main()
-{
-    string name;
-    int age = 0;
-    cout &lt;&lt; "nawe xot w tamant bnwsa" &lt;&lt; endl;
-    cin &gt;&gt; name &gt;&gt; age;
-    cout &lt;&lt; "slaw:" &lt;&lt; name &lt;&lt; endl;
-    cout &lt;&lt; "to tamant " &lt;&lt; age &lt;&lt; "a" &lt;&lt; endl;
-
-
-
-    system("pause");
-    return0:  
-}
-.......
- ef w else 
-
-
-
-#include &lt;iostream&gt;
-using namespace std;
-
-
-
-int main()
-{
-    int num1;
-    int num2;
-    cin &gt;&gt; num1;
-    cin &gt;&gt; num2;
-    if(num1&gt;num2)
-    {
-        cout &lt;&lt; "zhmaray yakam gawra tra la dwam" &lt;&lt; endl;
+void main() {
+  runApp(MaterialApp( 
+    home:Scaffold(
+      appBar: AppBar(title: Text("drawer example"),),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: const Color.fromARGB(255, 228, 22, 8)),
+              child: Text("appakan", style: TextStyle(color: const Color.fromARGB(255, 223, 227, 231) ,fontSize: 24)),
+            ),
+            ListTile(
+              leading:Icon(Icons.facebook),
+              title: Text("facebook"),
+              onTap: (){},
+            ),
+            ListTile(
+              leading:Icon(Icons.snapchat),
+              title: Text("snap"),
+              onTap: (){},
+            ),
+            
+            
+          ],
+          
+          ),
+        ),
+      )
+    ) ,
+  );
+  
     }
-    else if (num1 &lt; num2) {
-        cout &lt;&lt; "zhmaray yakam bchwktra tra la dwam" &lt;&lt; endl;
-    }
-    else if (num1 == num2) {
-        cout &lt;&lt; "zhmaray yakam yaksana ba dwam" &lt;&lt; endl;
-    }
-    else {
-        cout &lt;&lt; "hichkamyan" &lt;&lt; endl;
-    }
-    system("pause");
-    return0:  
+.......................................................
+wanay dwham serchkrdn 
+
+void main() {
+  final allItems=['appel','banana','cat','dog'];
+  String searchtext="";
+  runApp( 
+    MaterialApp( 
+      home: Scaffold(
+        body: StatefulBuilder(
+          builder: (context,setstate) {
+            return Column(
+              children: [
+                TextField(
+                  onChanged: (value){
+                    setstate(()=>searchtext=value);
+
+                  }
+                  
+                )
+                Expanded (
+                  child: ListView(
+                    children: [
+                      for(var item in allItems)
+                      if(item.contains(searchtext))
+                      ListTile(title: Text(item)),
+                
+                    ],
+
+                  ),
+                ),
+              ],
+
+            );
+          }
+          ),
+      ),
+    ),
+
+  );
+
+  
 }
+.......................................
+ vedoi 3  danane  buttnek 
 
+void main() {
+  runApp(
+    MaterialApp(
+      home: Scaffold(
 
-.......
-for lop  
+        floatingActionButton: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
 
-#include &lt;iostream&gt;
-using namespace std;
+            FloatingActionButton(
+              heroTag: "btn1",
+              onPressed: () {
+                print("First button pressed");
+              },
+              child: Icon(Icons.add),
+            ), // FloatingActionButton
 
+            SizedBox(height: 10),
 
+            FloatingActionButton(
+              heroTag: "btn2",
+              backgroundColor: Colors.red,
+              onPressed: () {
+                print("Second button pressed");
+              },
+              child: Icon(Icons.delete),
+            ), // FloatingActionButton
 
-int main()
-{
-    for (int x = 1; x &lt; 5;x++) {
-        cout &lt;&lt; "slaw" &lt;&lt; x &lt;&lt; endl;
-   }
-    system("pause");
-    return0:  
-}
-..............
-        warze 2
-desktop mfc app 
-...............
-drwskrdne wendoka multi docomente ifisa 
-,,,,,,,,,,
-bo baznaw shtaka  single docoment 
-kakrawa la sorce filakaya  nawe  filakaman view.cpp
-achyta xwarawa ta void  ondrow  comente naw kawanaka la abayn aikain ba A
-enja la xware konetakay trawa pesh daxsttnaway } aka  anwsen 
-A-&gt;Rectangle(50,20,600,500);
-A-&gt;Elipse(180,120,430,430);
-A-&gt;LineTo(600,500);
-A-&gt;TextOutw(280,270,_T("Ali kaka"));
+          ],
+        ), // Column
 
-.......................
-7asebaka  dailoag basic  dwatr finsh 
-3 static text  ayanen nawakan akain ba A B C 
- 3 idet  controlish ahenet 
-sors file  yakam w dwam akaytawaw saiv akayt 
-labashi header filesh 2 ham  sehamish dailogaka w H aka saiv akain 
-id  idet kontrolakan  la axerawa 1 la abaynw aikain ba _A w  b w c 
-batnek ahnen nawakay akain bapey krdaraka - + i dy batnaka  agoren konkrdnawaw awana ba nwsn  saiv adaynawa law 4ay sarawa desan
-kliki rast lasar idit pointarakan  Add varable ktegore akain ba value  name  akain m_a  public bka ba privte  varable type akain ba double 
-lasar batnaka  add event handle class list akain ba xware xwarawa enja ok akain 
-lawe anwsen 
-
-UpdateData(TRUE);
-m_c=m_a+m_b;
-UpdateData(FOLSE);</code></pre>
+      ), // Scaffold
+    ), // MaterialApp
+  );
+}</code></pre>
 </div>
-
-<script>
-    function copyAllCode() {
-        const codeElement = document.getElementById('fullCodeBlock');
-        const textArea = document.createElement('textarea');
-        // بەکارهێنانی textContent بۆ ئەوەی کۆدە نێردراوەکە وەک خۆی کۆپی ببێتەوە
-        textArea.value = codeElement.textContent;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        
-        const btn = document.querySelector('.copy-btn');
-        btn.innerText = 'Copied!';
-        setTimeout(() => { btn.innerText = 'Copy All Code'; }, 2000);
-    }
-</script>
 
 </body>
 </html>
